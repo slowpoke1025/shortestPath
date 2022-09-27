@@ -51,7 +51,7 @@ const COL = getComputedStyle(document.documentElement).getPropertyValue("--col-n
 const container = document.querySelector(".container")
 
 
-if (!("ontouchstart" in document.documentElement)) {
+if (("ontouchstart" in document.documentElement)) {
     container.classList.add("mobile")
 }
 
