@@ -11,8 +11,32 @@
 </head>
 
 <body>
-    <div class="container">
+    <nav>
 
+        <div class="form-group">
+            <form class="label-box" id="algo">
+                <h4>Algo:</h4>
+                <label for="Dijkstra"><input type="radio" name="algo" id="Dijkstra" value="Dijkstra" checked>
+                    Dijkstra</label>
+                <label for="Astar"><input type="radio" name="algo" id="Astar" value="Astar"> Astar</label>
+            </form>
+
+            <form class="label-box" id="mode">
+                <h4>setting:</h4>
+                <label for="start"><input type="radio" name="mode" id="start" value="start" checked>
+                    start</label>
+                <label for="end"><input type="radio" name="mode" id="end" value="end">
+                    end</label>
+            </form>
+        </div>
+        <button type="button" id="btn">Go</button>
+    </nav>
+    <div class="main">
+        <div class="bg">
+            <div class="container">
+
+            </div>
+        </div>
     </div>
 </body>
 
