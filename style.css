@@ -84,7 +84,7 @@ body {
 .label-box {
     padding: 5px 10px 5px 10px;
     background-color: #fff;
-    width: fit-content;
+    /* width: fit-content; */
     border-radius: 5px;
     display: flex;
     gap: 10px;
@@ -150,7 +150,11 @@ button {
     flex: 0 0 5%;
 }
 
-button:hover {
+.block {
+    cursor: not-allowed;
+}
+
+button:not(.block):hover {
     /* box-shadow: 0 0 3px #fff; */
     filter: drop-shadow(0 0 3px #fff);
 }

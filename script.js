@@ -6,7 +6,8 @@ const MODE = document.getElementById("mode")
 const BTN = document.getElementById("btn")
 let algo;
 let mode = "start";
-
+let complete = false
+let ing = false
 
 
 MODE.addEventListener("change", e => {
@@ -14,15 +15,20 @@ MODE.addEventListener("change", e => {
 })
 
 BTN.addEventListener("click", e => {
-    algo = document.querySelector("[name=algo]:checked").value
-    console.log(algo, mode)
 
+    if (!SPOT["start"] || !SPOT["end"] || SPOT["start"] === SPOT["end"])
+        return alert("起終點設定錯誤")
+
+    algo = document.querySelector("[name=algo]:checked").value
     if (algo === "Dijkstra")
         print(Dijkstra(SPOT["start"], SPOT["end"]))
     else {
         print(Astart(SPOT["start"], SPOT["end"]))
     }
+    ing = true
     BTN.disabled = true;
+    BTN.textContent = "ING"
+    BTN.classList.add("block")
 })
 
 
@@ -31,10 +37,20 @@ const OBJS = []
 let SPOT = { start: null, end: null };
 let TARGET;
 document.addEventListener("click", e => {
+
+    if (ing) return
+
     if (e.target.matches(".node")) {
+
+        if (complete) {
+            NODES.forEach(n => n.node.className = "node")
+            complete = false
+        }
+
         const index = NODES.findIndex(n => n.node === e.target)
-        NODES[index].add(mode)
+
         SPOT[mode]?.remove(mode)
+        NODES[index].add(mode)
         SPOT[mode] = NODES[index]
 
         if (mode === 'start') {
@@ -218,8 +234,14 @@ function print(obj) {
         }, 100)
     }
 
-    if (obj.path.length === 0)
-        return BTN.disabled = false
+    if (obj.path.length === 0) {
+        BTN.disabled = false
+        BTN.textContent = "Go"
+        BTN.classList.remove("block")
+        complete = true
+        ing = false
+        return
+    }
 
     requestAnimationFrame(() => print(obj))
 }
